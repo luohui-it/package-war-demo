@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config>
+
+    <!-- Dubbo服务IP、Port配置 -->
+    <group name="dubbo">
+        <property name="dubbo.registry.url"       defaultValue="192.178.106.224:2181"   description="dubbo注册中心地址"/>
+        <property name="dubbo.settlecenter.port"  defaultValue="-1"                     description="服务端口"/>
+        <property name="zookeeper.address"        defaultValue="192.178.106.224:2181"   description="客户端端口" />
+        <property name="zookeeper.lockTime"       defaultValue="3"                      description="ZK锁时间" />
+    </group>
+
+    <!--kafka-->
+    <group name="kafka">
+        <property name="kafka.threadCount"        defaultValue="5" description="kafka线程数" />
+        <property name="kafka.clusterAddress"     defaultValue="192.178.106.220:29092,192.178.106.221:29092"
+                  description="kafka集群地址" />
+    </group>
+
+    <!-- Redis服务信息配置 -->
+    <group name="redis">
+        <property name="redis.host"             defaultValue="192.178.106.220"  description="redis服务地址" />
+        <property name="redis.port"             defaultValue="6379"             description="redis服务端口" />
+        <property name="redis.clusterName"      defaultValue="mymaster"         description="redis服务名称"/>
+        <property name="redis.minIdle"          defaultValue="50" />
+        <property name="redis.maxIdle"          defaultValue="200" />
+        <property name="redis.maxTotal"         defaultValue="300" />
+        <property name="redis.testOnBorrow"     defaultValue="true" />
+        <property name="redis.database"         defaultValue="2"/>
+    </group>
+
+    <!--3DES-->
+    <group name="common">
+        <property name="THREE_DES_KEY"          defaultValue="settlecenterKey"      description="3des加密Key" />
+        <property name="VERIFY_LOCAL_DIR"       defaultValue="C:/settlecenter"      description="对账文件本地目录"/>
+    </group>
+
+    <!-- 数据库配置 -->
+    <group name="database">
+        <property name="jdbc.jdbcUrl"           defaultValue="jdbc:oracle:thin:@192.178.106.223:1521/zhangwudev"
+                  description="jdbcUrl"/>
+        <property name="jdbc.jdbcUsername"      defaultValue="settlement"   description="username" />
+        <property name="jdbc.jdbcPassword"      defaultValue="oracle123"    description="password"/>
+    </group>
+
+    <!-- 连接池配置 -->
+    <group name="jdbc">
+        <property name="jdbc.driverClassName"                   defaultValue="oracle.jdbc.driver.OracleDriver" />
+        <property name="jdbc.initialSize"                       defaultValue="20" />
+        <property name="jdbc.minIdle"                           defaultValue="10" />
+        <property name="jdbc.maxIdle"                           defaultValue="100" />
+        <property name="jdbc.maxActive"                         defaultValue="20" />
+        <property name="jdbc.maxWait"                           defaultValue="1000" />
+        <property name="jdbc.testOnBorrow"                      defaultValue="false" />
+        <property name="jdbc.testWhileIdle"                     defaultValue="true" />
+        <property name="jdbc.timeBetweenEvictionRunsMillis"     defaultValue="10000" />
+        <property name="jdbc.numTestsPerEvictionRun"            defaultValue="3" />
+        <property name="jdbc.minEvictableIdleTimeMillis"        defaultValue="300000" />
+    </group>
+
+    <!-- dfs -->
+    <group name="dfs">
+        <property name="tracker.server"                         defaultValue="192.178.106.223:60001" />
+    </group>
+
+    <!--付款信息-->
+    <group name="payment">
+        <property name="PAY_RESERVER_PARAM"         defaultValue="INFO"                     description="付款预留参数"/>
+        <property name="PAY_CERTIFICATE_PASS"       defaultValue="xvcjkaljowre"             description="付款密钥"/>
+        <property name="PAY_KEY"                    defaultValue="kso48860KJDNFejch903fuio" description="日志目录"/>
+        <property name="PAY_URL"
+                  defaultValue="https://116.228.151.160:8189/services/BestpayServiceServerOnSkysz.ws?wsdl"
+                  description="付款请求地址"/>
+        <property name="PAY_CERTIFICATE_USER"       defaultValue="WN"   description="付款用户"/>
+    </group>
+
+    <!--交易转账-->
+    <group name="transfer">
+        <property name="FEE_ACC_ID"                 defaultValue="10000005"     description="手续费转账会计事件ID"/>
+        <property name="REFUND_FEE_ACC_ID"          defaultValue="10000019"     description="退手续费转账会计事件ID"/>
+    </group>
+
+    <!--邮件发送-->
+    <group name="email">
+        <property name="EMAIL_ACCOUNT"              defaultValue="1@163.com"    description="邮件发送用户"/>
+        <property name="EMAIL_ACCOUNT_PASS"         defaultValue="******"       description="邮件发送用户密码"/>
+        <property name="EMAIL_SMTP_HOST"            defaultValue="163.smtp.com" description="邮件SMTP地址"/>
+
+    </group>
+
+    <!--短信发送-->
+    <group name="sms">
+        <property name="SMS_HTTP_URL"               defaultValue="http://"  description="短信平台地址"/>
+        <property name="SMS_POST_TYPE"              defaultValue="sendSms"  description="短信类型"/>
+        <property name="SMS_EA"                     defaultValue="1"        description="加密类型"/>
+        <property name="SMS_ACCOUNT"                defaultValue="1"        description="短信发送账户"/>
+        <property name="SMS_ACCOUNT_PASS"           defaultValue="1"        description="短信发送账户密码"/>
+        <property name="SMS_PRIORITY"               defaultValue="1"        description="短信优先级"/>
+        <property name="SMS_TEMPLATE_ID"            defaultValue="10056"    description="短信模板ID"/>
+    </group>
+
+    <!-- 日志级别、路径配置 -->
+    <group name="logger">
+        <property name="logger_logLevel"            defaultValue="DEBUG"    description="日志打印级别"/>
+        <property name="logger_outside_logLevel"    defaultValue="INFO"     description="外部包日志打印级别"/>
+        <property name="logger_logback_logpath"     defaultValue="/logs/"   description="日志目录"/>
+    </group>
+
+    <!-- dispatch配置 -->
+    <group name="dispatch">
+        <property name="dispatch.noTaskSleepSeconds"        defaultValue="120"     description="dispatch无任务休眠时间"/>
+        <property name="dispatch.settleDelaySeconds"        defaultValue="120"     description="结算任务延迟时间（秒）"/>
+        <property name="dispatch.settleReportDelaySeconds"  defaultValue="300"     description="结算报表任务延迟时间（秒）"/>
+        <property name="dispatch.settleReTryCount"          defaultValue="2"       description="结算任务重试次数"/>
+        <property name="dispatch.settleRetryInterval"       defaultValue="120"     description="结算重试间隔执行值（秒）"/>
+    </group>
+
+    <!-- AutoConfig替换模版配置 -->
+    <script>
+        <generate template="WEB-INF/classes/spring/spring-datasources.xml" charset="UTF-8"/>
+    </script>
+
+</config>
+

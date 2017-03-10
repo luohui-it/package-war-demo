@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <parent>
+        <artifactId>package-demo</artifactId>
+        <groupId>com.bestpay.package</groupId>
+        <version>1.0-SNAPSHOT</version>
+    </parent>
+    <modelVersion>4.0.0</modelVersion>
+
+    <artifactId>module-web</artifactId>
+    <packaging>war</packaging>
+    <name>module-web</name>
+
+    <dependencies>
+        <dependency>
+            <groupId>com.bestpay.package</groupId>
+            <artifactId>module-package</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-webmvc</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-jdbc</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>ojdbc7</groupId>
+            <artifactId>ojdbc7</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>commons-dbcp</groupId>
+            <artifactId>commons-dbcp</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.mybatis</groupId>
+            <artifactId>mybatis-spring</artifactId>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <finalName>package-demo</finalName>
+        <resources>
+            <resource>
+                <directory>src/main/resources</directory>
+                <filtering>true</filtering>
+            </resource>
+        </resources>
+        <plugins>
+            <plugin>
+                <artifactId>maven-war-plugin</artifactId>
+                <configuration>
+                    <outputDirectory>${basedir}/../target</outputDirectory>
+                    <warName>${project.build.finalName}</warName>
+                    <webResources>
+                        <resource>
+                            <directory>${basedir}/src/main/webapp</directory>
+                            <filtering>true</filtering>
+                        </resource>
+                    </webResources>
+                    <archive>
+                        <addMavenDescriptor>false</addMavenDescriptor>
+                        <manifestEntries>
+                            <timestamp>${maven.build.timestamp}</timestamp>
+                        </manifestEntries>
+                    </archive>
+                </configuration>
+            </plugin>
+
+            <plugin>
+                <groupId>com.alibaba.citrus.tool</groupId>
+                <artifactId>autoconfig-maven-plugin</artifactId>
+                <version>${autoconfig.plugin.version}</version>
+                <!--用于自定义antx.property的文件位置-->
+                <configuration>
+                    <userProperties>E:/properties/antx.properties</userProperties>
+                </configuration>
+                <executions>
+                    <execution>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>autoconfig</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
+
+
+</project>
